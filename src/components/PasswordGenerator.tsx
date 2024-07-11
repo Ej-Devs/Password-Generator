@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./ui/Button";
 
 const PasswordGenerator: React.FC = () => {
+  const [rangeValue, setRangeValue] = useState<number>(10);
+
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setRangeValue(Number(e.target.value));
+  };
 
   return (
     <div className="flex items-center justify-center font-mono">
@@ -25,7 +30,29 @@ const PasswordGenerator: React.FC = () => {
             </svg>
           </Button>
         </div>
-        
+        <div className="lg:w-full md:w-full w-[343px] lg:h-[528px] md:h-[528px] h-[423px] bg-darkGrey lg:mt-[24px] md:mt-[24px] mt-[16px]">
+          <div className="lg:w-[476px] md:w-[476px] w-[311px] lg:h-[43px] md:h-[43px] h-[67px] lg:px-[32px] md:px-[32px] px-[16px] lg:pt-[24px] md:pt-[24px] pt-[16px] flex items-center justify-between">
+            <p className="lg:w-[173px] md:w-[173px] w-[154px] lg:h-[24px] md:h-[24px] h-[21px] text-nowrap lg:pt-[10px] md:pt-[10px] pt-[5px] lg:pb-[8px] md:pb-[8px] text-lightGrey text-body">
+              Character Length
+            </p>
+            <p className="lg:w-[39px] md:w-[39px] w-[29px] lg:h-[42px] md:h-[42px] h-[32px] lg:pt-[10px] md:pt-[10px] pt-[5px] lg:pb-[8px] md:pb-[8px] text-neonGreen lg:text-headingL md:text-headingL text-headingM">
+              {rangeValue}
+            </p>
+          </div>
+          <div className="lg:w-[476px] md:w-[476px] w-[311px] lg:h-[28px] md:h-[28px] h-[8px] lg:px-[32px] md:px-[32px] px-[16px] lg:pt-[16px] md:pt-[16px] pt-[18px]">
+            <input
+              type="range"
+              min={1}
+              max={20}
+              value={rangeValue}
+              onChange={handleRangeChange}
+              style={
+                { "--value": `${((rangeValue - 1) * 100) / 19}%` } as React.CSSProperties
+              }
+              className="lg:w-[476px] md:w-[476px] w-[311px] h-[8px] bg-transparent outline-none range-input"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
