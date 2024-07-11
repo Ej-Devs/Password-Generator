@@ -5,30 +5,37 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      sm: '375px',
-      md: '768px',
-      lg: '1440px',
-      // xl: '1440px',
-    },
     extend: {
       colors: {
-        veryDarkGrey: '#18171F',
-        darkGrey: '#24232C',
-        mediumGrey: '#817D92',
-        lightGrey: '#E6E5EA',
-        neonGreen: '#A4FFAF',
-        red: '#F64A4A',
-        orange: '#FB7C58',
-        yellow: '#F8CD65',
+        'bg-main': '#24232C',
+        'bg-dark': '#18171F',
+        'text-light': '#E6E5EA',
+        'accent-green': '#A4FFAF',
+        'accent-orange': '#FB7C58',
+        'accent-yellow': '#F8CD65',
+        'accent-red': '#F64A4A',
+        'gray-text': '#817D92',
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'monospace'],
+        'jetbrains': ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
-        headingL: ['32px', '43px'],
-        body: ['18px', '23px'],
-        headingM: ['24px', '31px'],
+        'heading-l': ['32px', {
+          lineHeight: '45px',
+          fontWeight: 'bold',
+        }],
+        'heading-m': ['24px', {
+          lineHeight: '31px',
+          fontWeight: 'bold',
+        }],
+        'body': ['18px', {
+          lineHeight: '23px',
+          fontWeight: 'bold',
+        }],
+      },
+      maxWidth: {
+        'lgScreen': '540px',
+        'smScreen': '343px',
       },
     },
   },
