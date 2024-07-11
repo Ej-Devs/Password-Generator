@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import PasswordDisplay from "./ui/PasswordDisplay";
+import LengthSlider from "./ui/LengthSlider";
 
 const PasswordGenerator: React.FC = () => {
   const [password, setPassword] = useState("P4$5W0rD!");
+  const [length, setLength] = useState(10);
 
   const copyPassword = () => {
     navigator.clipboard.writeText(password);
@@ -17,6 +19,9 @@ const PasswordGenerator: React.FC = () => {
         </h1>
         <div className="bg-bg-main px-8 py-4 mb-4 rounded-none w-full lg:max-w-lgScreen md:max-w-lgScreen max-w-smScreen">
           <PasswordDisplay password={password} onCopy={copyPassword} />
+        </div>
+        <div className="bg-bg-main p-8 rounded-none w-full lg:max-w-lgScreen md:max-w-lgScreen max-w-smScreen">
+        <LengthSlider length={length} onChange={setLength} />
         </div>
       </div>
     </div>
