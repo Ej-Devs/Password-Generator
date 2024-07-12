@@ -80,6 +80,7 @@ const generatePassword = () => {
   setPassword(generatedPassword);
   calculateStrength(generatedPassword);
 };
+```
 
 ### Continued development
 
