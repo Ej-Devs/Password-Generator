@@ -3,6 +3,7 @@ import PasswordDisplay from "./ui/PasswordDisplay";
 import LengthSlider from "./ui/LengthSlider";
 import OptionsCheckbox from "./ui/OptionsCheckbox";
 import StrengthIndicator from "./ui/StrengthIndicator";
+import GenerateButton from "./ui/GenerateButton";
 
 const PasswordGenerator: React.FC = () => {
   const [password, setPassword] = useState("P4$5W0rD!");
@@ -102,6 +103,7 @@ const PasswordGenerator: React.FC = () => {
             onChange={setIncludeSymbols}
           />
           <StrengthIndicator strength={strength} />
+          <GenerateButton onClick={generatePassword} />
         </div>
       </div>
     </div>
