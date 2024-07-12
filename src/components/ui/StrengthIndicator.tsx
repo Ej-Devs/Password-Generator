@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface StrengthIndicatorProps {
-  strength: 'NONE' | 'TOO WEAK!' | 'WEAK' | 'MEDIUM' | 'STRONG';
+  strength: '' | 'TOO WEAK!' | 'WEAK' | 'MEDIUM' | 'STRONG';
 }
 
 const StrengthIndicator: React.FC<StrengthIndicatorProps> = ({ strength }) => {
@@ -11,13 +11,13 @@ const StrengthIndicator: React.FC<StrengthIndicatorProps> = ({ strength }) => {
       case 'WEAK': return 'bg-accent-orange';
       case 'MEDIUM': return 'bg-accent-yellow';
       case 'STRONG': return 'bg-accent-green';
-      case 'NONE': return 'bg-transparent';
+      case '': return 'bg-transparent';
     }
   };
 
   const getFilledBars = () => {
     switch (strength) {
-      case 'NONE': return 0;
+      case '': return 0;
       case 'TOO WEAK!': return 1;
       case 'WEAK': return 2;
       case 'MEDIUM': return 3;

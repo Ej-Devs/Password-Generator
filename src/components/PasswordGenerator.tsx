@@ -6,21 +6,19 @@ import StrengthIndicator from "../components/ui/StrengthIndicator";
 import GenerateButton from "../components/ui/GenerateButton";
 
 const PasswordGenerator: React.FC = () => {
-  const [password, setPassword] = useState("P4$5W0rD!");
-  const [length, setLength] = useState(10);
-  const [includeUpper, setIncludeUpper] = useState(true);
-  const [includeLower, setIncludeLower] = useState(true);
-  const [includeNumbers, setIncludeNumbers] = useState(true);
+  const [password, setPassword] = useState("");
+  const [length, setLength] = useState(0);
+  const [includeUpper, setIncludeUpper] = useState(false);
+  const [includeLower, setIncludeLower] = useState(false);
+  const [includeNumbers, setIncludeNumbers] = useState(false);
   const [includeSymbols, setIncludeSymbols] = useState(false);
-  const [strength, setStrength] = useState<
-    "NONE" | "TOO WEAK!" | "WEAK" | "MEDIUM" | "STRONG"
-  >("MEDIUM");
+  const [strength, setStrength] = useState<"" | "TOO WEAK!" | "WEAK" | "MEDIUM" | "STRONG">("");
   const [copied, setCopied] = useState(false);
 
   const generatePassword = () => {
     if (!includeUpper && !includeLower && !includeNumbers && !includeSymbols || length === 0) {
       setPassword("");
-      setStrength("NONE");
+      setStrength("");
       return;
     }
 
@@ -47,7 +45,7 @@ const PasswordGenerator: React.FC = () => {
 
   const calculateStrength = (password: string) => {
     if (password.length === 0) {
-      setStrength("NONE");
+      setStrength("");
       return;
     }
 
@@ -76,11 +74,13 @@ const PasswordGenerator: React.FC = () => {
   };
 
   const copyPassword = () => {
+    if (!password) return;
+
     navigator.clipboard.writeText(password);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
-    }, 4000);
+    }, 3000);
   };
 
   return (
