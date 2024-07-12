@@ -1,36 +1,37 @@
 #length-slider {
-    -webkit-appearance: none; /* Override default CSS styles */
-    appearance: none;
-  }
-  
-  #length-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 28px;
-    height: 28px;
-    background: #A4FFAF;
-    border: 3px solid #A4FFAF;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    transform: translateX(6px); /* Shift thumb to the right */
-  }
-  
-  #length-slider::-webkit-slider-thumb:hover {
-    background: #18171F;
-  }
-  
-  #length-slider::-moz-range-thumb {
-    width: 28px;
-    height: 28px;
-    background: #A4FFAF;
-    border: 3px solid #A4FFAF;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    transform: translateX(6px); /* Shift thumb to the right */
-  }
-  
-  #length-slider::-moz-range-thumb:hover {
-    background: #18171F;
-  }
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+}
+
+#length-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  background: #A4FFAF;
+  border: 3px solid #A4FFAF;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  transform: translateX(6px); /* Shift thumb to the right */
+}
+
+#length-slider::-webkit-slider-thumb:hover {
+  background: #18171F;
+}
+
+#length-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  background: #E6E5EA;
+  border: 3px solid #E6E5EA;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  transform: translateX(6px); /* Shift thumb to the right */
+}
+
+#length-slider::-moz-range-thumb:hover {
+  background: #18171F;
+  border: 3px solid #A4FFAF;
+}
