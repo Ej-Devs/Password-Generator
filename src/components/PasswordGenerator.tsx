@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import PasswordDisplay from "./ui/PasswordDisplay";
-import LengthSlider from "./ui/LengthSlider";
-import OptionsCheckbox from "./ui/OptionsCheckbox";
-import StrengthIndicator from "./ui/StrengthIndicator";
-import GenerateButton from "./ui/GenerateButton";
+import PasswordDisplay from "../components/ui/PasswordDisplay";
+import LengthSlider from "../components/ui/LengthSlider";
+import OptionsCheckbox from "../components/ui/OptionsCheckbox";
+import StrengthIndicator from "../components/ui/StrengthIndicator";
+import GenerateButton from "../components/ui/GenerateButton";
 
 const PasswordGenerator: React.FC = () => {
   const [password, setPassword] = useState("P4$5W0rD!");
@@ -15,8 +15,15 @@ const PasswordGenerator: React.FC = () => {
   const [strength, setStrength] = useState<
     "NONE" | "TOO WEAK!" | "WEAK" | "MEDIUM" | "STRONG"
   >("MEDIUM");
+  const [copied, setCopied] = useState(false);
 
   const generatePassword = () => {
+    if (!includeUpper && !includeLower && !includeNumbers && !includeSymbols || length === 0) {
+      setPassword("");
+      setStrength("NONE");
+      return;
+    }
+
     const upperSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const lowerSet = "abcdefghijklmnopqrstuvwxyz";
     const numberSet = "0123456789";
@@ -39,6 +46,11 @@ const PasswordGenerator: React.FC = () => {
   };
 
   const calculateStrength = (password: string) => {
+    if (password.length === 0) {
+      setStrength("NONE");
+      return;
+    }
+
     let strengthScore = 0;
     const lengthCriteria = password.length >= 8;
     const upperCriteria = /[A-Z]/.test(password);
@@ -58,16 +70,17 @@ const PasswordGenerator: React.FC = () => {
       setStrength("WEAK");
     } else if (strengthScore === 3) {
       setStrength("MEDIUM");
-    } else if (strengthScore === 4) {
-      setStrength("STRONG");
-    } else if (strengthScore === 5) {
+    } else if (strengthScore >= 4) {
       setStrength("STRONG");
     }
   };
 
   const copyPassword = () => {
     navigator.clipboard.writeText(password);
-    // Optionally, show a "Copied" message
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 4000);
   };
 
   return (
@@ -77,7 +90,7 @@ const PasswordGenerator: React.FC = () => {
           Password Generator
         </h1>
         <div className="bg-bg-main px-8 py-4 mb-4 rounded-none w-full lg:max-w-lgScreen md:max-w-lgScreen max-w-smScreen">
-          <PasswordDisplay password={password} onCopy={copyPassword} />
+          <PasswordDisplay password={password} onCopy={copyPassword} copied={copied} />
         </div>
 
         <div className="bg-bg-main p-8 rounded-none w-full lg:max-w-lgScreen md:max-w-lgScreen max-w-smScreen">
@@ -103,7 +116,7 @@ const PasswordGenerator: React.FC = () => {
             onChange={setIncludeSymbols}
           />
           <StrengthIndicator strength={strength} />
-          <GenerateButton onClick={generatePassword} />
+          <GenerateButton onClick={generatePassword} />
         </div>
       </div>
     </div>
