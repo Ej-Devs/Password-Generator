@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PasswordDisplay from "./ui/PasswordDisplay";
 import LengthSlider from "./ui/LengthSlider";
 import OptionsCheckbox from "./ui/OptionsCheckbox";
+import StrengthIndicator from "./ui/StrengthIndicator";
 
 const PasswordGenerator: React.FC = () => {
   const [password, setPassword] = useState("P4$5W0rD!");
@@ -10,6 +11,9 @@ const PasswordGenerator: React.FC = () => {
   const [includeLower, setIncludeLower] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(false);
+  const [strength, setStrength] = useState<
+    "NONE" | "TOO WEAK!" | "WEAK" | "MEDIUM" | "STRONG"
+  >("MEDIUM");
 
   const copyPassword = () => {
     navigator.clipboard.writeText(password);
@@ -48,6 +52,7 @@ const PasswordGenerator: React.FC = () => {
             checked={includeSymbols}
             onChange={setIncludeSymbols}
           />
+          <StrengthIndicator strength={strength} />
         </div>
       </div>
     </div>
