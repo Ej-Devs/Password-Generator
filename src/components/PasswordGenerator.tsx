@@ -15,6 +15,55 @@ const PasswordGenerator: React.FC = () => {
     "NONE" | "TOO WEAK!" | "WEAK" | "MEDIUM" | "STRONG"
   >("MEDIUM");
 
+  const generatePassword = () => {
+    const upperSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowerSet = "abcdefghijklmnopqrstuvwxyz";
+    const numberSet = "0123456789";
+    const symbolSet = "!@#$%^&*()_+[]{}|;:',.<>?/~`";
+
+    let characterSet = "";
+    if (includeUpper) characterSet += upperSet;
+    if (includeLower) characterSet += lowerSet;
+    if (includeNumbers) characterSet += numberSet;
+    if (includeSymbols) characterSet += symbolSet;
+
+    let generatedPassword = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characterSet.length);
+      generatedPassword += characterSet[randomIndex];
+    }
+
+    setPassword(generatedPassword);
+    calculateStrength(generatedPassword);
+  };
+
+  const calculateStrength = (password: string) => {
+    let strengthScore = 0;
+    const lengthCriteria = password.length >= 8;
+    const upperCriteria = /[A-Z]/.test(password);
+    const lowerCriteria = /[a-z]/.test(password);
+    const numberCriteria = /[0-9]/.test(password);
+    const symbolCriteria = /[!@#$%^&*()_+\-=[\]{}|;:',.<>?/~`]/.test(password);
+
+    if (lengthCriteria) strengthScore++;
+    if (upperCriteria) strengthScore++;
+    if (lowerCriteria) strengthScore++;
+    if (numberCriteria) strengthScore++;
+    if (symbolCriteria) strengthScore++;
+
+    if (strengthScore <= 1) {
+      setStrength("TOO WEAK!");
+    } else if (strengthScore === 2) {
+      setStrength("WEAK");
+    } else if (strengthScore === 3) {
+      setStrength("MEDIUM");
+    } else if (strengthScore === 4) {
+      setStrength("STRONG");
+    } else if (strengthScore === 5) {
+      setStrength("STRONG");
+    }
+  };
+
   const copyPassword = () => {
     navigator.clipboard.writeText(password);
     // Optionally, show a "Copied" message
