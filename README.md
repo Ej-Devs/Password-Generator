@@ -56,11 +56,12 @@ Users should be able to:
 - [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript
 - [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [styled-components](https://styled-components.com/) - Visual primitives for the component age
 - [React Icons](https://react-icons.github.io/react-icons/) - Popular icons in React
 
 ### What I learned
 
-Working on this project helped me to reinforce my understanding of React and TypeScript. I also got more comfortable using Tailwind CSS for styling and managing responsive layouts. Here are some specific things I learned:
+Working on this project helped me to reinforce my understanding of React and TypeScript. I also got more comfortable using styled-components with Tailwind CSS for styling and managing responsive layouts. Here are some specific things I learned:
 
 ```js
 const generatePassword = () => {
@@ -84,6 +85,55 @@ const generatePassword = () => {
   setPassword(generatedPassword);
   calculateStrength(generatedPassword);
 };
+```
+Using styled-components for dynamic styling:
+
+```js
+import styled from 'styled-components';
+
+const Slider = styled.input.attrs({ type: 'range' })<{ length: number }>`
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  outline: none;
+  background: ${(props) =>
+    `linear-gradient(to right, #A4FFAF 0%, #A4FFAF ${(props.length / 20) * 100}%, #18171F ${(props.length / 20) * 100}%, #18171F 100%)`};
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background: #A4FFAF;
+    border: 3px solid #A4FFAF;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    transform: translateX(6px); 
+  }
+
+  &::-webkit-slider-thumb:hover {
+    background: #18171F;
+  }
+
+  &::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    background: #E6E5EA;
+    border: 3px solid #E6E5EA;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    transform: translateX(6px); 
+  }
+
+  &::-moz-range-thumb:hover {
+    background: #18171F;
+    border: 3px solid #A4FFAF;
+  }
+`;
 ```
 
 ### Continued development
